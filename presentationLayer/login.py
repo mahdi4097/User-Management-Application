@@ -2,8 +2,10 @@ from tkinter import Frame, Label, Entry, Button
 
 
 class LoginFrame(Frame):
-    def __init__(self, window):
+    def __init__(self, window, view):
         super().__init__(window)
+
+        self.main_view=view
 
         self.grid_columnconfigure(1, weight=1)
 
@@ -24,3 +26,10 @@ class LoginFrame(Frame):
 
         self.login_button = Button(self, text='Login')
         self.login_button.grid(row=3, column=1, pady=(0, 10), sticky='w')
+
+        self.register_button = Button(self, text='Register', command=self.show_register_frame)
+        self.register_button.grid(row=4, column=1, pady=(0, 10), sticky='w')
+
+
+    def show_register_frame(self):
+        self.main_view.switch_frame('register')
