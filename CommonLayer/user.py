@@ -6,3 +6,6 @@ class User:
         self.username = username
         self.password = password
         self.active = True if active == 1 else False
+
+    def get_fullname(self):
+        return f'{self.first_name} {self.last_name}'

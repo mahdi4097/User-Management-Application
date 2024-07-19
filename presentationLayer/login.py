@@ -1,11 +1,15 @@
-from tkinter import Frame, Label, Entry, Button
+from tkinter import Frame, Label, Entry, Button, messagebox
+from BusinessLogicLayer.user_business_logic import UserBusinessLogic
+from icecream import ic
 
 
 class LoginFrame(Frame):
     def __init__(self, window, view):
         super().__init__(window)
+        # ic(self) # NOTE: self: <presentationLayer.login.LoginFrame object .!loginframe>
 
-        self.main_view=view
+        self.main_view = view
+        # ic(view) # NOTE: self.main_view and view: <presentationLayer.main_view.MainView object at 0x000001EB25207890>
 
         self.grid_columnconfigure(1, weight=1)
 
@@ -16,20 +20,38 @@ class LoginFrame(Frame):
         self.username_label.grid(row=1, column=0, pady=(0, 10), padx=10, sticky='e')
 
         self.username_entry = Entry(self)
+        self.username_entry.insert(0, 'z.saeidi')
         self.username_entry.grid(row=1, column=1, pady=(0, 10), padx=(0, 20), sticky='ew')
 
         self.password_label = Label(self, text='password')
         self.password_label.grid(row=2, column=0, pady=(0, 10), padx=10, sticky='e')
 
         self.password_entry = Entry(self, show='*')
+        self.password_entry.insert(0, '123456')
         self.password_entry.grid(row=2, column=1, pady=(0, 10), padx=(0, 20), sticky='ew')
 
-        self.login_button = Button(self, text='Login')
+        self.login_button = Button(self, text='Login', command=self.login)
         self.login_button.grid(row=3, column=1, pady=(0, 10), sticky='w')
 
         self.register_button = Button(self, text='Register', command=self.show_register_frame)
         self.register_button.grid(row=4, column=1, pady=(0, 10), sticky='w')
 
-
     def show_register_frame(self):
         self.main_view.switch_frame('register')
+
+    def login(self):
+        username = self.username_entry.get()
+        password = self.password_entry.get()
+
+        user_business = UserBusinessLogic()
+        response = user_business.login(username, password)
+        if not response.success:
+            messagebox.showerror('Error', response.message)
+        else:
+            self.clear_username_password()
+            home_frame = self.main_view.switch_frame('home')
+            home_frame.set_current_user(response.data)
+
+    def clear_username_password(self):
+        self.username_entry.delete(0, 'end')
+        self.password_entry.delete(0, 'end')
