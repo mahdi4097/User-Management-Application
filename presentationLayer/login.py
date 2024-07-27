@@ -6,10 +6,10 @@ from icecream import ic
 class LoginFrame(Frame):
     def __init__(self, window, view):
         super().__init__(window)
-        # ic(self) # NOTE: self: <presentationLayer.login.LoginFrame object .!loginframe>
+        # NOTE: self: <presentationLayer.login.LoginFrame object .!loginframe>
 
         self.main_view = view
-        # ic(view) # NOTE: self.main_view and view: <presentationLayer.main_view.MainView object at 0x000001EB25207890>
+        # NOTE: self.main_view and view: <presentationLayer.main_view.MainView object at 0x000001EB25207890>
 
         self.grid_columnconfigure(1, weight=1)
 
@@ -51,6 +51,7 @@ class LoginFrame(Frame):
             self.clear_username_password()
             home_frame = self.main_view.switch_frame('home')
             home_frame.set_current_user(response.data)
+            # NOTE: response.data: <CommonLayer.user.User object at 0x0000025AAD45DE50>
 
     def clear_username_password(self):
         self.username_entry.delete(0, 'end')
