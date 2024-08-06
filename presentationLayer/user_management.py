@@ -1,5 +1,4 @@
-from tkinter import Frame, Label, Button, Entry
-from tkinter.ttk import Treeview
+from ttkbootstrap import Frame, Label, Button, Entry, Treeview
 from BusinessLogicLayer.user_business_logic import UserBusinessLogic
 
 
@@ -14,7 +13,7 @@ class UserMnagementFrame(Frame):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(3, weight=1)
 
-        self.header = Label(self, text='User Management Form')
+        self.header = Label(self, text='User Management Form', font=("Arial", 13, "bold"))
         self.header.grid(row=0, column=0, pady=10)
 
         self.search_entry = Entry(self, width=30)

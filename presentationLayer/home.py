@@ -1,4 +1,4 @@
-from tkinter import Frame, Label, Button
+from ttkbootstrap import Frame, Label, Button
 from icecream import ic
 
 
@@ -25,7 +25,7 @@ class HomeFrame(Frame):
 
     def set_current_user(self, user):
         self.current_user = user  # NOTE: user: <CommonLayer.user.User object at 0x000001DAA410EB40>
-        self.header.configure(text=f'Welcome {self.current_user.get_fullname()}')
+        self.header.configure(text=f'Welcome {self.current_user.get_fullname()}', font=("Arial", 13, "bold"))
         if self.current_user.role_id == 2:
             self.user_management_button.grid(row=2, column=0, pady=(0, 10), padx=20, sticky='ew')
 

@@ -85,3 +85,35 @@ class UserDataAccess:
             user = User(item[0], item[1], item[2], item[3], None, True if item[4] == 1 else False, item[5])
             search_result_list.append(user)
         return search_result_list
+
+    def check_username_existence(self, requested_username):
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            data = cursor.execute(
+                '''
+                            SELECT     username
+                            FROM       User
+                            WHERE      username=?
+                            ''', [requested_username]
+            ).fetchall()
+            if data:
+                return True
+
+    def register_new_user(self, firstname, lastname, username, password):
+        with sqlite3.connect(self.database_name) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                '''
+                INSERT INTO User (
+                                    first_name,
+                                    last_name,
+                                    username,
+                                    password
+                                 )
+                VALUES (?,?,?,?)
+                                     
+                            ''', [firstname, lastname, username, password]
+            )
+
+            connection.commit()
+            print("User registered successfully.")
