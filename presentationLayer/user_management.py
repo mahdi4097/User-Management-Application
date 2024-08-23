@@ -1,11 +1,13 @@
 from ttkbootstrap import Frame, Label, Button, Entry, Treeview
 from BusinessLogicLayer.user_business_logic import UserBusinessLogic
+from CommonLayer.general_decorators import confirmation_decorator, performance_logger_decorator
 
 
-class UserMnagementFrame(Frame):
+class UserManagementFrame(Frame):
     def __init__(self, window, view):
         super().__init__(window)
 
+        self.main_view = view
         self.row_list = []
         self.current_user = None
         self.user_business = UserBusinessLogic()
@@ -36,11 +38,14 @@ class UserMnagementFrame(Frame):
         self.user_table.heading('#3', text='username')
         self.user_table.heading('#4', text='Status')
 
+    @performance_logger_decorator
     def search(self):
         search_value = self.search_entry.get()
         user_list = self.user_business.search(search_value, self.current_user)
         self.fill_table(user_list)
 
+    @performance_logger_decorator
+    @confirmation_decorator
     def activate(self):
         user_id_list = self.user_table.selection()
         for user_id in user_id_list:
@@ -48,6 +53,8 @@ class UserMnagementFrame(Frame):
         user_list = self.load_data()
         self.fill_table(user_list)
 
+    @performance_logger_decorator
+    @confirmation_decorator
     def deactivate(self):
         user_id_list = self.user_table.selection()
         for user_id in user_id_list:
@@ -55,15 +62,18 @@ class UserMnagementFrame(Frame):
         user_list = self.load_data()
         self.fill_table(user_list)
 
+    @performance_logger_decorator
     def set_current_user(self, user):
         self.current_user = user
         user_list = self.load_data()
         self.fill_table(user_list)
 
+    @performance_logger_decorator
     def load_data(self):
         user_list = self.user_business.get_users(self.current_user)
         return user_list
 
+    @performance_logger_decorator
     def fill_table(self, user_list):
         for row in self.row_list:
             self.user_table.delete(row)

@@ -1,11 +1,14 @@
 import sqlite3
 from CommonLayer.user import User
+import bcrypt
+from CommonLayer.general_decorators import performance_logger_decorator
 
 
 class UserDataAccess:
     def __init__(self):
         self.database_name = "UserManagementDB.db"
 
+    @performance_logger_decorator
     def get_user_with_username_password(self, username, password):
         with sqlite3.connect(self.database_name) as connection:
             cursor = connection.cursor()
@@ -20,13 +23,15 @@ class UserDataAccess:
                        role_id
                 FROM   User
                 WHERE  username=?
-                And    password=?
-                            ''', [username, password]
+                            ''', [username]
             ).fetchone()
         if data:
-            user = User(data[0], data[1], data[2], data[3], data[4], data[5], data[6])
-            return user
+            stored_password = data[4]
+            if bcrypt.checkpw(password.encode('utf-8'), stored_password):
+                user = User(data[0], data[1], data[2], data[3], data[4], data[5], data[6])
+                return user
 
+    @performance_logger_decorator
     def get_users_except_current_user(self, current_user_id):
         user_list = []
         with sqlite3.connect(self.database_name) as connection:
@@ -49,6 +54,7 @@ class UserDataAccess:
                 user_list.append(user)
         return user_list
 
+    @performance_logger_decorator
     def update_active_value(self, user_id, new_value):
         with sqlite3.connect(self.database_name) as connection:
             cursor = connection.cursor()
@@ -61,6 +67,7 @@ class UserDataAccess:
             )
             connection.commit()
 
+    @performance_logger_decorator
     def search_firstname_lastname_username(self, search_value, current_user):
         search_result_list = []
         with sqlite3.connect(self.database_name) as connection:
@@ -86,6 +93,7 @@ class UserDataAccess:
             search_result_list.append(user)
         return search_result_list
 
+    @performance_logger_decorator
     def check_username_existence(self, requested_username):
         with sqlite3.connect(self.database_name) as connection:
             cursor = connection.cursor()
@@ -99,6 +107,7 @@ class UserDataAccess:
             if data:
                 return True
 
+    @performance_logger_decorator
     def register_new_user(self, firstname, lastname, username, password):
         with sqlite3.connect(self.database_name) as connection:
             cursor = connection.cursor()
@@ -116,4 +125,3 @@ class UserDataAccess:
             )
 
             connection.commit()
-            print("User registered successfully.")

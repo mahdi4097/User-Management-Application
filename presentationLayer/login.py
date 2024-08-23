@@ -1,7 +1,6 @@
 from ttkbootstrap import Frame, Label, Entry, Button
 from ttkbootstrap.dialogs import Messagebox
 from BusinessLogicLayer.user_business_logic import UserBusinessLogic
-from icecream import ic
 
 
 class LoginFrame(Frame):
@@ -28,7 +27,7 @@ class LoginFrame(Frame):
 		self.password_label.grid(row=2, column=0, pady=(0, 10), padx=10, sticky='e')
 
 		self.password_entry = Entry(self, show='*')
-		self.password_entry.insert(0, '123456')
+		self.password_entry.insert(0, '111111')
 		self.password_entry.grid(row=2, column=1, pady=(0, 10), padx=(0, 20), sticky='ew')
 
 		self.login_button = Button(self, text='Login', command=self.login)

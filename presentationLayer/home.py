@@ -19,7 +19,6 @@ class HomeFrame(Frame):
 
         self.user_management_button = Button(self, text='User Management', command=self.go_user_management)
 
-
     def logout(self):
         self.main_view.switch_frame('login')
 
