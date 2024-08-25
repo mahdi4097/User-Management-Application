@@ -19,7 +19,7 @@ class UserBusinessLogic:
 		if not user:
 			return Response(None, False, 102, 'Invalid username or password.')
 
-		if not user.active:
+		if not user.active.value:
 			return Response(None, False, 103, 'Your username is not active.')
 
 		return Response(user, True, 201)
@@ -49,8 +49,10 @@ class UserBusinessLogic:
 	@performance_logger_decorator
 	def check_new_user_entries(self, firstname, lastname, username, password):
 		try:
-			User(None, firstname, lastname, username, password, None, None)
+			user_data = (None, firstname, lastname, username, password, None, None)
+			User.create_user_with_tuple(user_data)
 		except ValueError as error:
+			print(error)
 			return Response(None, False, error.args[0], error.args[1])
 
 		finally:

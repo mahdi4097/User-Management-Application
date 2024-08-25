@@ -83,7 +83,7 @@ class UserManagementFrame(Frame):
         for user in user_list:
             row = self.user_table.insert(
                 '', 'end', iid=user.id, text=str(row_number),
-                values=(user.first_name, user.last_name, user.username, 'Active' if user.active else 'Deactive')
+                values=(user.first_name, user.last_name, user.username, 'Active' if user.active.value else 'Deactive')
             )
             self.row_list.append(row)
             row_number += 1

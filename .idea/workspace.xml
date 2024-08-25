@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d794fc1-3ed8-46f7-8ba3-bec0390d30d7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CommonLayer/general_decorators.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentationLayer/critical_activity_confirmation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/UserManagemetApplication.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UserManagemetApplication.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CommonLayer/status.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BusinessLogicLayer/user_business_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogicLayer/user_business_logic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CommonLayer/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/CommonLayer/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataAccessLayer/user_data_access.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccessLayer/user_data_access.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserManagementDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/UserManagementDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentationLayer/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/presentationLayer/home.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentationLayer/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/presentationLayer/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentationLayer/main_view-S3374.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentationLayer/main_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/presentationLayer/main_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentationLayer/user_management.py" beforeDir="false" afterPath="$PROJECT_DIR$/presentationLayer/user_management.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

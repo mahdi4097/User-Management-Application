@@ -2,6 +2,7 @@ import sqlite3
 from CommonLayer.user import User
 import bcrypt
 from CommonLayer.general_decorators import performance_logger_decorator
+from CommonLayer.status import Status
 
 
 class UserDataAccess:
@@ -28,7 +29,7 @@ class UserDataAccess:
         if data:
             stored_password = data[4]
             if bcrypt.checkpw(password.encode('utf-8'), stored_password):
-                user = User(data[0], data[1], data[2], data[3], data[4], data[5], data[6])
+                user = User.create_user_with_tuple(data)
                 return user
 
     @performance_logger_decorator
@@ -50,7 +51,8 @@ class UserDataAccess:
             ).fetchall()
 
             for item in data:
-                user = User(item[0], item[1], item[2], item[3], None, True if item[4] == 1 else False, item[5])
+                user_data = (item[0], item[1], item[2], item[3], None, Status(item[4]), item[5])
+                user = User.create_user_with_tuple(user_data)
                 user_list.append(user)
         return user_list
 
@@ -89,7 +91,8 @@ class UserDataAccess:
             ).fetchall()
 
         for item in data:
-            user = User(item[0], item[1], item[2], item[3], None, True if item[4] == 1 else False, item[5])
+            user_data = (item[0], item[1], item[2], item[3], None, Status(item[4]), item[5])
+            user = User.create_user_with_tuple(user_data)
             search_result_list.append(user)
         return search_result_list
 
